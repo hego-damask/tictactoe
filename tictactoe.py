@@ -1,5 +1,5 @@
 from array import array
-
+import os
 def print_board(board, num = False):
     XO = lambda cell: 'X' if cell == 1 else 'O' if cell == -1 else ' '
     result = ['' for i in range(9)]
@@ -69,12 +69,14 @@ def check(board, choice):
     return 0
 
 board = array('i', [0 for i in range(9)])
-print_board(board, num = True)
-print('='*6)
+reference = array('i', [0 for i in range(9)])
 turn = 0
 n_moves = 0
 history = []
+os.system('cls||clear')
 while(True):
+    print_board(reference, num = True)
+    print('='*6)
     print_board(board)
     choice = int(input(f'Player {turn+1}: '))
     if choice not in range(9):
@@ -91,20 +93,28 @@ while(True):
     turn = int(not(turn))
     n_moves += 1
     if n_moves == 9:
+        print('='*6)
+        print_board(board)
         print('Its a draw')
         break
+    os.system('cls||clear')
     if n_moves >= 5:
         result = check(board, choice)
         if result == 0:
             continue
         elif result == 1:
+            print_board(reference, num = True)
+            print('='*6)
+            print_board(board)
             print('Player 1 wins')
             break
         elif result == -1:
+            print_board(reference, num = True)
+            print('='*6)
+            print_board(board)
             print('Player 2 wins')
             break
     
-
 
 
 
